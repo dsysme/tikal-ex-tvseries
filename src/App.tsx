@@ -1,26 +1,55 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+import {
+  HashRouter as Router, Switch, Route, Redirect
+} from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Header } from './components/header/Header';
+import { Tile } from './components/tile/Tile';
+import { List } from './components/list/List';
+import { Home } from './routes/home';
+
+
+type State = {
+  q: string
+  shows: any
+}
+
+class App extends React.Component<State> {
+  state: State = {
+    q: '',
+    shows: []
+  }
+
+  handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value
+    this.setState({q: query})
+    fetch(`http://api.tvmaze.com/search/shows?q=${query}`)
+    .then(res => res.json())
+    .then(data => this.setState({shows: data}));
+  }
+
+  render() {
+    const { q, shows } = this.state;
+    return (
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path = "/home">
+              <Home
+                q={q}
+                shows={shows}
+                handleSearchChange={this.handleSearchChange}
+              />
+            </Route>
+            <Redirect to="/home"/>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
+
 }
 
 export default App;
