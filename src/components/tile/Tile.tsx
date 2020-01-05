@@ -1,11 +1,11 @@
 import React from 'react';
 
-type Props = {
+type TileProps = {
     name: string
     pic: string
 }
 
-export const Tile: React.FC<Props> = ({name, pic}) => {
+export const Tile: React.FC<TileProps> = ({name, pic}) => {
     return (
         <div>
             <div>

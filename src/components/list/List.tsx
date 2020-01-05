@@ -1,11 +1,11 @@
 import React from 'react'
 import { Tile } from '../tile/Tile'
 
-type Props = {
+type ListProps = {
     shows: any
 }
 
-export const List: React.FC<Props> = ({ shows }) => {
+export const List: React.FC<ListProps> = ({ shows }) => {
     return (
         <div>
             {shows.map((item: any) => (

@@ -10,13 +10,14 @@ import { Tile } from './components/tile/Tile';
 import { List } from './components/list/List';
 import { Home } from './routes/home';
 
+type Props = {}
 
 type State = {
   q: string
   shows: any
 }
 
-class App extends React.Component<State> {
+class App extends React.Component<Props, State> {
   state: State = {
     q: '',
     shows: []

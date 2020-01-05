@@ -1,0 +1,9 @@
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  input {
+    margin-right: 0.4 rem;
+  }
